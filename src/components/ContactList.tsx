@@ -11,7 +11,7 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import * as Contacts from "expo-contacts";
-import Colors from "@/src/constants/Colors";
+import Colors from "@/src/constants/colors";
 import * as SMS from "expo-sms";
 import InvitationCard from "@/assets/svgs/InvitationCard";
 

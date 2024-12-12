@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Placeholder from "@/assets/svgs/ImagePicker";
-import Colors from "@/src/constants/Colors";
+import Colors from "@/src/constants/colors";
 import { useRouter } from "expo-router";
 import axios from "axios";
 

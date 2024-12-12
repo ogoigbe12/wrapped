@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import Colors from "@/src/constants/Colors";
+import Colors from "@/src/constants/colors";
 import Layer from "@/assets/svgs/Layer";
 import ContactList from "../components/ContactList";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
