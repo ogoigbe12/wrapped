@@ -6,8 +6,8 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import Colors from "@/src/constants/colors";
-import Layer from "@/assets/svgs/Layer";
+import colors from "@/src/constants/colors";
+import Layer from "@/assets/svg/Layer";
 import ContactList from "../components/ContactList";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
@@ -37,7 +37,7 @@ const InviteFriendsScreen: React.FC = () => {
       </ScrollView>
       <View>
         <TouchableOpacity style={styles.blueButton}>
-          <FontAwesome6 name="share-square" size={15} color={Colors.white} />
+          <FontAwesome6 name="share-square" size={15} color={colors.white} />
           <Text style={styles.blueButtonText}>Invite 5 friends </Text>
           <Text style={styles.numberCount}>{inviteCount}/5</Text>
         </TouchableOpacity>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
   },
   contentContainer: {
     padding: 20,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   greenButton: {
     width: "50%",
-    backgroundColor: Colors.green,
+    backgroundColor: colors.green,
     paddingVertical: 15,
     borderRadius: 25,
     alignItems: "center",
@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
     marginHorizontal: "auto",
   },
   greenButtonText: {
-    color: Colors.white,
+    color: colors.white,
     fontWeight: "bold",
   },
   subheading: {
     fontSize: 16,
-    color: Colors.green,
+    color: colors.green,
     textAlign: "center",
     marginBottom: 10,
   },
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   blueButton: {
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.primary,
     paddingVertical: 15,
     borderRadius: 32,
     alignItems: "center",
@@ -100,20 +100,20 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   blueButtonText: {
-    color: Colors.white,
+    color: colors.white,
     fontWeight: "bold",
   },
   footerText: {
     textAlign: "center",
     marginTop: 20,
-    color: Colors.gray,
+    color: colors.gray,
   },
   numberCount: {
-    color: Colors.white,
+    color: colors.white,
     borderWidth: 2,
     borderRadius: 50,
     borderStyle: "solid",
-    borderColor: Colors.count,
+    borderColor: colors.count,
     justifyContent: "center",
     textAlign: "center",
     fontSize: 14,

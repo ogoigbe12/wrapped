@@ -9,8 +9,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import Placeholder from "@/assets/svgs/ImagePicker";
-import Colors from "@/src/constants/colors";
+import Placeholder from "@/assets/svg/ImagePicker";
+import colors from "@/src/constants/colors";
 import { useRouter } from "expo-router";
 import axios from "axios";
 
@@ -82,7 +82,7 @@ const Profile: React.FC = () => {
         <View style={styles.imageContainer}>
           {!profileImage && (
             <View style={styles.inlineText}>
-              <Text style={{ textAlign: "center", color: Colors.white }}>
+              <Text style={{ textAlign: "center", color: colors.white }}>
                 +
               </Text>
             </View>
@@ -104,14 +104,14 @@ const Profile: React.FC = () => {
       </View>
 
       <View style={styles.buttonView}>
-        {uploading && <ActivityIndicator size="large" color={Colors.primary} />}
+        {uploading && <ActivityIndicator size="large" color={colors.primary} />}
 
         <TouchableOpacity
           style={[styles.button, styles.chooseButton]}
           onPress={pickImage}
           disabled={uploading}
         >
-          <Text style={[styles.buttonText, { color: Colors.primary }]}>
+          <Text style={[styles.buttonText, { color: colors.primary }]}>
             {profileImage ? "Change photo" : "Choose a photo"}
           </Text>
         </TouchableOpacity>
@@ -138,19 +138,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
   },
   title: {
     fontSize: 24,
     textAlign: "center",
     fontWeight: "600",
-    color: Colors.black,
+    color: colors.black,
     marginBottom: 8,
   },
   inlineText: {
     width: 20,
     height: 20,
-    backgroundColor: Colors.blue,
+    backgroundColor: colors.blue,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 14,
-    color: Colors.gray,
+    color: colors.gray,
     marginBottom: 20,
     textAlign: "center",
   },
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginHorizontal: "auto",
     position: "relative",
-    backgroundColor: Colors.placeholder,
+    backgroundColor: colors.placeholder,
   },
   profileImage: {
     borderRadius: 50,
@@ -195,18 +195,18 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   chooseButton: {
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     borderWidth: 1,
-    borderColor: Colors.primary,
+    borderColor: colors.primary,
   },
   takeButton: {
-    backgroundColor: Colors.primary,
+    backgroundColor: colors.primary,
   },
   buttonText: {
     fontSize: 16,
   },
   takeButtonText: {
-    color: "white",
+    color: colors.white,
   },
 });
 
