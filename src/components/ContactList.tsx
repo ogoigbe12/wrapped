@@ -11,7 +11,7 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import * as Contacts from "expo-contacts";
-import Colors from "../constants/Colors";
+import Colors from "@/src/constants/Colors";
 import * as SMS from "expo-sms";
 import InvitationCard from "@/assets/svgs/InvitationCard";
 
@@ -22,17 +22,19 @@ type Contact = {
 };
 
 type TContactListProps = React.FC<{
-  onInvite: (id: string) => void;
+  handleUpdateInviteCount: (updatedCount: number) => void;
 }>;
 
-const ContactList: TContactListProps = ({ onInvite }) => {
+const ContactList: TContactListProps = ({ handleUpdateInviteCount }) => {
   const scrollRef = useRef<ScrollView>(null);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
   const [permissionStatus, setPermissionStatus] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [invitedCount, setInvitedCount] = useState(0);
-  const [invitedContacts, setInvitedContacts] = useState<(Contact | null)[]>(Array(5).fill(null));
+  const [invitedContacts, setInvitedContacts] = useState<(Contact | null)[]>(
+    Array(5).fill(null)
+  );
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -64,7 +66,7 @@ const ContactList: TContactListProps = ({ onInvite }) => {
       prev.map((contact) => {
         if (contact.id === id) {
           const updatedContact = { ...contact, invited: !contact.invited };
-  
+
           // Update the invited contacts array and invited count based on the new state
           if (!contact.invited && invitedCount < 5) {
             const updatedInvitedContacts = [...invitedContacts];
@@ -78,13 +80,13 @@ const ContactList: TContactListProps = ({ onInvite }) => {
             setInvitedContacts(updatedInvitedContacts);
             setInvitedCount((prevCount) => prevCount - 1);
           }
-  
+
           return updatedContact;
         }
         return contact;
       })
     );
-  
+
     // Send SMS to the contact if invited
     const contact = contacts.find((contact) => contact.id === id);
     if (contact && !contact.invited) {
@@ -92,6 +94,7 @@ const ContactList: TContactListProps = ({ onInvite }) => {
         ["08165250973"],
         `Hello ${contact.name}, you're invited to Wrapped!`
       );
+      handleUpdateInviteCount(1);
     }
   };
 
@@ -111,7 +114,8 @@ const ContactList: TContactListProps = ({ onInvite }) => {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Text style={{ fontSize: 16, color: Colors.black }}>
-          We need access to your contacts. Please grant the permission to continue.
+          We need access to your contacts. Please grant the permission to
+          continue.
         </Text>
       </View>
     );
@@ -134,7 +138,9 @@ const ContactList: TContactListProps = ({ onInvite }) => {
             <View key={index} style={styles.avatar}>
               <View style={styles.invitation}>
                 {contact ? (
-                  <Text style={styles.avatarText}>{contact.name.charAt(0)}</Text>
+                  <Text style={styles.avatarText}>
+                    {contact.name.charAt(0)}
+                  </Text>
                 ) : (
                   <InvitationCard />
                 )}
@@ -180,13 +186,11 @@ const ContactListItem: TContactListItem = ({ item, handleInvite }) => (
       onPress={() => handleInvite(item.id)}
     >
       {item.invited ? (
-        <Ionicons name="heart" size={10} color="black" />
+        <Ionicons name="heart-outline" size={10} color="black" />
       ) : (
         <Ionicons name="person-add-sharp" size={10} color={Colors.black} />
       )}
-      <Text style={styles.inviteButtonText}>
-        Invite
-      </Text>
+      <Text style={styles.inviteButtonText}>Invite</Text>
     </TouchableOpacity>
   </View>
 );

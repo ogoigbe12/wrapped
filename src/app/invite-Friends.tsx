@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,14 +6,13 @@ import {
   StyleSheet,
   ScrollView,
 } from "react-native";
-import Colors from "../constants/Colors";
+import Colors from "@/src/constants/Colors";
 import Layer from "@/assets/svgs/Layer";
 import ContactList from "../components/ContactList";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 const InviteFriendsScreen: React.FC = () => {
-  const handleInvite = (id: string) => {
-  };
+  const [inviteCount, setInviteCount] = useState(0);
   return (
     <View style={styles.container}>
       <ScrollView
@@ -30,13 +29,17 @@ const InviteFriendsScreen: React.FC = () => {
           <Layer />
           <Text style={styles.subheading}>Why 5 friends?</Text>
         </View>
-        <ContactList onInvite={handleInvite} />
+        <ContactList
+          handleUpdateInviteCount={(updatedCount) => {
+            setInviteCount((prev) => prev + updatedCount);
+          }}
+        />
       </ScrollView>
       <View>
         <TouchableOpacity style={styles.blueButton}>
           <FontAwesome6 name="share-square" size={15} color={Colors.white} />
           <Text style={styles.blueButtonText}>Invite 5 friends </Text>
-          <Text style={styles.numberCount}>0/5</Text>
+          <Text style={styles.numberCount}>{inviteCount}/5</Text>
         </TouchableOpacity>
         <Text style={styles.footerText}>🎉 Invited by Gift</Text>
       </View>
@@ -121,4 +124,3 @@ const styles = StyleSheet.create({
 });
 
 export default InviteFriendsScreen;
-

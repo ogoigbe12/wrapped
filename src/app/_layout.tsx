@@ -14,7 +14,7 @@ export default function RootLayoutNav() {
         options={{ headerTitle: "", headerTransparent: true }}
       />
       <Stack.Screen
-        name="inviteFriends"
+        name="invite-Friends"
         options={{
           headerTitle: "",
           headerTransparent: true,

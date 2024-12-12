@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Placeholder from "@/assets/svgs/ImagePicker";
-import Colors from "../constants/Colors";
+import Colors from "@/src/constants/Colors";
 import { useRouter } from "expo-router";
 import axios from "axios";
 
@@ -82,7 +82,9 @@ const Profile: React.FC = () => {
         <View style={styles.imageContainer}>
           {!profileImage && (
             <View style={styles.inlineText}>
-              <Text style={{ textAlign: "center", color: Colors.white }}>+</Text>
+              <Text style={{ textAlign: "center", color: Colors.white }}>
+                +
+              </Text>
             </View>
           )}
           {profileImage ? (
@@ -117,7 +119,7 @@ const Profile: React.FC = () => {
         <TouchableOpacity
           style={[styles.button, styles.takeButton]}
           onPress={
-            profileImage ? () => router.push("/inviteFriends") : takePhoto
+            profileImage ? () => router.push("/invite-Friends") : takePhoto
           }
           disabled={uploading}
         >
