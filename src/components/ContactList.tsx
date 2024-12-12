@@ -58,42 +58,43 @@ const ContactList: TContactListProps = ({ onInvite }) => {
     fetchContacts();
   }, []);
 
-  //handleInvite through SMS
   const handleInvite = async (id: string) => {
+    // Update the contact's 'invited' status in the state
     setContacts((prev) =>
       prev.map((contact) => {
         if (contact.id === id) {
+          const updatedContact = { ...contact, invited: !contact.invited };
+  
+          // Update the invited contacts array and invited count based on the new state
           if (!contact.invited && invitedCount < 5) {
             const updatedInvitedContacts = [...invitedContacts];
-            updatedInvitedContacts[invitedCount] = contact;
+            updatedInvitedContacts[invitedCount] = updatedContact;
             setInvitedContacts(updatedInvitedContacts);
             setInvitedCount((prevCount) => prevCount + 1);
           } else if (contact.invited) {
-            const updatedInvitedContacts = invitedContacts.map((c) => (c?.id === id ? null : c));
+            const updatedInvitedContacts = invitedContacts.map((c) =>
+              c?.id === id ? null : c
+            );
             setInvitedContacts(updatedInvitedContacts);
             setInvitedCount((prevCount) => prevCount - 1);
           }
-          return { ...contact, invited: !contact.invited };
+  
+          return updatedContact;
         }
         return contact;
       })
     );
-
-
-    // Send SMS to the contact
+  
+    // Send SMS to the contact if invited
     const contact = contacts.find((contact) => contact.id === id);
     if (contact && !contact.invited) {
       const { result } = await SMS.sendSMSAsync(
         ["08165250973"],
         `Hello ${contact.name}, you're invited to Wrapped!`
       );
-      if (result === "sent") {
-        Alert.alert("Success", `Invitation sent to ${contact.name}`);
-      } 
     }
   };
 
-  //handle search
   const handleSearch = (text: string) => {
     setSearchText(text);
     if (text.trim() === "") {
@@ -107,7 +108,13 @@ const ContactList: TContactListProps = ({ onInvite }) => {
   };
 
   if (!permissionStatus) {
-    return <Text>We need access to your contacts.</Text>;
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ fontSize: 16, color: Colors.black }}>
+          We need access to your contacts. Please grant the permission to continue.
+        </Text>
+      </View>
+    );
   }
 
   return (
@@ -172,9 +179,13 @@ const ContactListItem: TContactListItem = ({ item, handleInvite }) => (
       style={[styles.inviteButton, item.invited ? styles.invitedButton : {}]}
       onPress={() => handleInvite(item.id)}
     >
-      <Ionicons name="person-add-sharp" size={10} color={Colors.black} />
+      {item.invited ? (
+        <Ionicons name="heart" size={10} color="black" />
+      ) : (
+        <Ionicons name="person-add-sharp" size={10} color={Colors.black} />
+      )}
       <Text style={styles.inviteButtonText}>
-        {item.invited ? "Invited" : "Invite"}
+        Invite
       </Text>
     </TouchableOpacity>
   </View>
