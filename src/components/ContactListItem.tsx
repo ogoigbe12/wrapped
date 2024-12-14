@@ -15,11 +15,7 @@ const ContactListItem: TContactListItem = ({ item, handleInvite }) => (
       style={[styles.inviteButton, item.invited ? styles.invitedButton : {}]}
       onPress={() => handleInvite(item.id)}
     >
-      {item.invited ? (
-        <Ionicons name="heart-outline" size={10} color="black" />
-      ) : (
         <Ionicons name="person-add-sharp" size={10} color={colors.black} />
-      )}
       <Text style={styles.inviteButtonText}>Invite</Text>
     </TouchableOpacity>
   </View>
